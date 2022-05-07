@@ -90,7 +90,7 @@ src
   - [*] Review project
 
 - [ ] Features/Mockup View
-  - [ ] Create Candidate list layout
+  - [*] Create election layout and mockup candidate list
   - [ ] Create Candidate card with mockup data
   - [ ] Create Vote and Already voted card
   - [ ] Review the Mockup View
