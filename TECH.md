@@ -46,13 +46,15 @@ score from the server-side and sum up who is the new mayor.
 
 The frontend architecture for LINE TOWN election project
 - Written frontend in Preact.JS (TypeScript)
+- Uses ESLint and Prettier to verify code 
+- Uses Husky and Lint-staged to ensure the code always follows ruleset
 
 <!-- ROADMAP -->
 ## Roadmap
 
 - [ ] Setup Project
   - [*] Initial Preact + TypeScript by Vite.js
-  - [ ] Install & config code verification dependency
+  - [*] Install & config code verification dependency
   - [ ] Install project dependency
   - [ ] Install CSS/style framework dependency
   - [ ] Setup project folder structure

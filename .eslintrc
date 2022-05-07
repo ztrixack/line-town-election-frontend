@@ -1,0 +1,61 @@
+{
+	"root": true,
+	"rules": {
+		"import/no-unresolved": 0,
+		"no-cond-assign": 0,
+		"object-shorthand": [2, "always"],
+		"no-console": 0,
+		"no-const-assign": 2,
+		"no-class-assign": 2,
+		"no-this-before-super": 2,
+		"no-var": 2,
+		"no-unreachable": 2,
+		"valid-typeof": 2,
+		"one-var": [2, "never"],
+		"prefer-arrow-callback": 2,
+		"prefer-const": [2, { "destructuring": "all" }],
+		"no-inner-declarations": 0,
+		"no-undef": 0,
+		"no-unused-vars": "off",
+		"@typescript-eslint/no-unused-vars": ["error"]
+	},
+	"env": {
+		"es6": true,
+		"node": true
+	},
+	"extends": [
+		// "preact",
+		// "eslint:recommended",
+		// "plugin:jest/recommended",
+		"plugin:@typescript-eslint/eslint-recommended"
+		// "plugin:@typescript-eslint/recommended",
+		// "plugin:import/errors",
+		// "plugin:import/warnings",
+		// "plugin:import/typescript",
+		// "prettier"
+	],
+	"parser": "@typescript-eslint/parser",
+	"parserOptions": {
+		"ecmaFeatures": {
+			"jsx": true
+		},
+		"ecmaVersion": 12,
+		"project": ["tsconfig.json"],
+		"sourceType": "module"
+	},
+	"ignorePatterns": [
+		"/dist/**/*" // Ignore built files.
+	],
+	"plugins": ["@typescript-eslint"],
+	"settings": {
+		"import/resolver": {
+			"node": {
+				"extensions": [".js", ".jsx", ".ts", ".tsx"],
+				"moduleDirectory": ["node_modules", "src/"]
+			}
+		},
+		"jest": {
+			"version": 26
+		}
+	}
+}

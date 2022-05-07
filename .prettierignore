@@ -1,0 +1,6 @@
+**/*.md
+**/*.svg
+**/*.ejs
+**/*.html
+src/common/lib/*
+node_modules
