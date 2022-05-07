@@ -1,0 +1,21 @@
+{
+  "name": "line-town-election",
+  "private": true,
+  "version": "0.0.0",
+  "main": "src/main.tsx",
+  "author": "Tanawat Hongthai (taha.h@kkumail.com)",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "preact": "^10.5.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.10",
+    "@preact/preset-vite": "^2.1.5",
+    "typescript": "^4.5.4",
+    "vite": "^2.9.7"
+  }
+}
