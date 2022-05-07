@@ -11,11 +11,15 @@
     "prepare": "husky install"
   },
   "dependencies": {
-    "preact": "^10.5.15"
+    "@stomp/stompjs": "^6.1.2",
+    "axios": "^0.27.2",
+    "preact": "^10.5.15",
+    "websocket": "^1.0.34"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
     "@preact/preset-vite": "^2.1.5",
+    "@testing-library/preact": "^2.0.1",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
     "eslint": "^8.15.0",
