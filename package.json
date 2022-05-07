@@ -3,7 +3,7 @@
 	"private": true,
 	"version": "0.0.0",
 	"main": "src/main.tsx",
-	"author": "Tanawat Hongthai (taha.h@kkumail.com)",
+	"author": "Tanawat Hongthai (tana.h@kkumail.com)",
 	"scripts": {
 		"dev": "vite",
 		"build": "tsc && vite build",
@@ -19,7 +19,8 @@
 		"@stomp/stompjs": "^6.1.2",
 		"axios": "^0.27.2",
 		"preact": "^10.5.15",
-		"websocket": "^1.0.34"
+		"websocket": "^1.0.34",
+		"wouter-preact": "^2.8.0-alpha.2"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
@@ -32,6 +33,7 @@
 		"flowbite": "^1.4.5",
 		"husky": "^7.0.4",
 		"lint-staged": "^12.4.1",
+		"path": "^0.12.7",
 		"postcss": "7.0.39",
 		"prettier": "^2.6.2",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
