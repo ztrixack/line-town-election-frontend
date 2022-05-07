@@ -49,7 +49,8 @@ The frontend architecture for LINE TOWN election project
 - Uses ESLint and Prettier to verify code 
 - Uses Husky and Lint-staged to ensure the code always follows ruleset
 - Uses Axios to make http requests
-- Uses Stomp and WebSocket to make full-duplex communication between the server and the client.
+- Uses Stomp and WebSocket to make full-duplex communication between the server and the client
+- Uses Tailwind.css to develop UI component and FontAwesome for icons
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -58,7 +59,7 @@ The frontend architecture for LINE TOWN election project
   - [*] Initial Preact + TypeScript by Vite.js
   - [*] Install & config code verification dependency
   - [*] Install project dependency
-  - [ ] Install CSS/style framework dependency
+  - [*] Install CSS/style framework dependency
   - [ ] Setup project folder structure
   - [ ] Review project
 

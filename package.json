@@ -1,42 +1,51 @@
 {
-  "name": "line-town-election",
-  "private": true,
-  "version": "0.0.0",
-  "main": "src/main.tsx",
-  "author": "Tanawat Hongthai (taha.h@kkumail.com)",
-  "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
-    "preview": "vite preview",
-    "prepare": "husky install"
-  },
-  "dependencies": {
-    "@stomp/stompjs": "^6.1.2",
-    "axios": "^0.27.2",
-    "preact": "^10.5.15",
-    "websocket": "^1.0.34"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.12.10",
-    "@preact/preset-vite": "^2.1.5",
-    "@testing-library/preact": "^2.0.1",
-    "@typescript-eslint/eslint-plugin": "^5.22.0",
-    "@typescript-eslint/parser": "^5.22.0",
-    "eslint": "^8.15.0",
-    "husky": "^7.0.4",
-    "lint-staged": "^12.4.1",
-    "prettier": "^2.6.2",
-    "typescript": "^4.5.4",
-    "vite": "^2.9.7"
-  },
-  "lint-staged": {
-    "src/**/*.{ts,tsx}": [
-      "eslint --cache --fix",
-      "git add ."
-    ],
-    "src/**/*.{js,jsx}": [
-      "eslint --cache --fix",
-      "git add ."
-    ]
-  }
+	"name": "line-town-election",
+	"private": true,
+	"version": "0.0.0",
+	"main": "src/main.tsx",
+	"author": "Tanawat Hongthai (taha.h@kkumail.com)",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc && vite build",
+		"preview": "vite preview",
+		"prepare": "husky install"
+	},
+	"dependencies": {
+		"@aduh95/preact-fontawesome": "^0.1.5",
+		"@fortawesome/fontawesome-svg-core": "^6.1.1",
+		"@fortawesome/free-brands-svg-icons": "^6.1.1",
+		"@fortawesome/free-regular-svg-icons": "^6.1.1",
+		"@fortawesome/free-solid-svg-icons": "^6.1.1",
+		"@stomp/stompjs": "^6.1.2",
+		"axios": "^0.27.2",
+		"preact": "^10.5.15",
+		"websocket": "^1.0.34"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.12.10",
+		"@preact/preset-vite": "^2.1.5",
+		"@testing-library/preact": "^2.0.1",
+		"@typescript-eslint/eslint-plugin": "^5.22.0",
+		"@typescript-eslint/parser": "^5.22.0",
+		"autoprefixer": "9.8.8",
+		"eslint": "^8.15.0",
+		"flowbite": "^1.4.5",
+		"husky": "^7.0.4",
+		"lint-staged": "^12.4.1",
+		"postcss": "7.0.39",
+		"prettier": "^2.6.2",
+		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
+		"typescript": "^4.5.4",
+		"vite": "^2.9.7"
+	},
+	"lint-staged": {
+		"src/**/*.{ts,tsx}": [
+			"eslint --cache --fix",
+			"git add ."
+		],
+		"src/**/*.{js,jsx}": [
+			"eslint --cache --fix",
+			"git add ."
+		]
+	}
 }
