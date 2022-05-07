@@ -46,17 +46,48 @@ score from the server-side and sum up who is the new mayor.
 
 The frontend architecture for LINE TOWN election project
 - Written frontend in Preact.JS (TypeScript)
+- Uses ESLint and Prettier to verify code 
+- Uses Husky and Lint-staged to ensure the code always follows ruleset
+- Uses Axios to make http requests
+- Uses Stomp and WebSocket to make full-duplex communication between the server and the client
+- Uses Tailwind.css to develop UI component and FontAwesome for icons
+
+<!-- FOLDER STRUCTURE -->
+declarations                // the type declaration files for all of the standardized built-in APIs available in JavaScript runtimes. 
+src
+├── assets                  // static resources and CSS style, which will be packaged and optimized
+│   ├── icons               // icon files e.g., ico, png, webp 
+│   ├── images              // image files e.g., png, jpg, webp 
+│   └── styles              // global CSS style
+│   └── svgs                // vector image
+├── common                  // public logic code encapsulation
+│   ├── config              // configuration file directory
+│   ├── hooks               // custom hooks
+│   ├── interfaces          // type or interfaces
+│   ├── lib                 // third party libraries are usually prevented here, such as jweixin js、jsBridge. js
+│   └── providers           // context providers
+├── containers              // core UI components
+│   ├── components          // global components, divided into business components or UI components
+│   ├── layouts             // templates. Different templates can be configured for different routes
+│   ├── pages               // page storage location
+│   │   └── home            
+│   │       └── components  // components at page level
+│   └── routes              // route configuration
+├── models                  // models type
+├── utils                   // tool method
+├── app.tsx                 // add the global management
+└── main.tsx                // root project
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Setup Project
+- [*] Setup Project
   - [*] Initial Preact + TypeScript by Vite.js
-  - [ ] Install & config code verification dependency
-  - [ ] Install project dependency
-  - [ ] Install CSS/style framework dependency
-  - [ ] Setup project folder structure
-  - [ ] Review project
+  - [*] Install & config code verification dependency
+  - [*] Install project dependency
+  - [*] Install CSS/style framework dependency
+  - [*] Setup project folder structure
+  - [*] Review project
 
 - [ ] Features/Mockup View
   - [ ] Create Candidate list layout

@@ -1,20 +1,8 @@
-import { Logo } from './logo'
+import routes from './containers/routes';
+import renderRoutes from './containers/routes/render';
 
-export function App() {
-  return (
-    <>
-      <Logo />
-      <p>Hello Vite + Preact!</p>
-      <p>
-        <a
-          class="link"
-          href="https://preactjs.com/"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn Preact
-        </a>
-      </p>
-    </>
-  )
-}
+const App = () => {
+	return <>{renderRoutes(routes)}</>;
+};
+
+export default App;
