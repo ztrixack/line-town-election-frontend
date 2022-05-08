@@ -1,14 +1,23 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { IElectionState } from '@/common/interfaces/election';
 import ElectionLayout from '@/containers/layouts/Election';
-import VoteCard from './components/VoteCard';
-
-const mockups = [...Array(8)].fill(0);
+import { CandidateAPI } from '@/api';
+import CandidateCard from './components/CandidateCard';
+import { ICandidate } from '@/models/candidate';
 
 const ElectionPage = () => {
+	const [candidates, setCandidates] = useState<ICandidate[]>([]);
 	const [electionState] = useState<IElectionState>('voting');
 	const isElectionClosed = electionState == 'closed';
+
+	useEffect(() => {
+		const call = async () => {
+			const candidates = await CandidateAPI.find<ICandidate[]>();
+			setCandidates(candidates);
+		};
+		call();
+	}, []);
 
 	return (
 		<ElectionLayout>
@@ -22,19 +31,10 @@ const ElectionPage = () => {
 				)}
 			</div>
 			<div class="flex flex-wrap px-3 md:px-6">
-				{mockups.map(() => (
+				{candidates.map(candidate => (
 					<div class="w-full md:w-1/2 lg:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
-							<VoteCard
-							// id={index}
-							// name="John Wick"
-							// state={electionState}
-							// dob={new Date('June 28, 1971')}
-							// imageLink="http://placekitten.com/600/600"
-							// policy="Choose me if your don't know who to choose"
-							// votedCount={1195}
-							// percentage="75%"
-							/>
+							<CandidateCard {...candidate} state={electionState} />
 						</div>
 					</div>
 				))}

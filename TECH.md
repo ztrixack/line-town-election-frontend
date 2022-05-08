@@ -55,6 +55,7 @@ The frontend architecture for LINE TOWN election project
 <!-- FOLDER STRUCTURE -->
 declarations                // the type declaration files for all of the standardized built-in APIs available in JavaScript runtimes. 
 src
+├── api                     // api
 ├── assets                  // static resources and CSS style, which will be packaged and optimized
 │   ├── icons               // icon files e.g., ico, png, webp 
 │   ├── images              // image files e.g., png, jpg, webp 
@@ -89,7 +90,7 @@ src
   - [*] Setup project folder structure
   - [*] Review project
 
-- [ ] Features/Mockup View
+- [*] Features/Mockup View
   - [*] Create election layout and mockup candidate list
   - [*] Create Candidate card with mockup data
   - [*] Add vitest for unit test
@@ -97,8 +98,8 @@ src
   - [*] Review the Mockup View
 
 - [ ] Features/RESTful API
-  - [ ] Create GET Candidates API Calling
-  - [ ] Create Vote Candidate and Check Vote API Calling
+  - [*] Create GET Candidates API
+  - [ ] Create Vote Candidate and Check Vote API
   - [ ] Create Election actions API 
   - [ ] Review the RESTful API
 
