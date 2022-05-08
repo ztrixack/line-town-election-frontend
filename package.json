@@ -1,14 +1,16 @@
 {
 	"name": "line-town-election",
 	"private": true,
-	"version": "0.0.0",
+	"version": "0.1.0",
 	"main": "src/main.tsx",
 	"author": "Tanawat Hongthai (tana.h@kkumail.com)",
 	"scripts": {
 		"dev": "vite",
-		"build": "tsc && vite build",
+		"build": "yarn test && tsc && vite build",
 		"preview": "vite preview",
-		"prepare": "husky install"
+		"coverage": "vitest run --coverage",
+		"test": "vitest",
+		"test:ui": "vitest --ui"
 	},
 	"dependencies": {
 		"@aduh95/preact-fontawesome": "^0.1.5",
@@ -25,12 +27,16 @@
 	"devDependencies": {
 		"@babel/core": "^7.12.10",
 		"@preact/preset-vite": "^2.1.5",
+		"@testing-library/jest-dom": "^5.16.4",
 		"@testing-library/preact": "^2.0.1",
+		"@types/jest": "^27.5.0",
 		"@typescript-eslint/eslint-plugin": "^5.22.0",
 		"@typescript-eslint/parser": "^5.22.0",
+		"@vitest/ui": "^0.10.5",
 		"autoprefixer": "9.8.8",
 		"eslint": "^8.15.0",
 		"flowbite": "^1.4.5",
+		"happy-dom": "^3.1.1",
 		"husky": "^7.0.4",
 		"lint-staged": "^12.4.1",
 		"path": "^0.12.7",
@@ -38,7 +44,8 @@
 		"prettier": "^2.6.2",
 		"tailwindcss": "npm:@tailwindcss/postcss7-compat",
 		"typescript": "^4.5.4",
-		"vite": "^2.9.7"
+		"vite": "^2.9.8",
+		"vitest": "^0.10.5"
 	},
 	"lint-staged": {
 		"src/**/*.{ts,tsx}": [

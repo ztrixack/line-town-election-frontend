@@ -17,6 +17,8 @@
 		"jsx": "preserve",
 		"jsxFactory": "h",
 		"jsxFragmentFactory": "Fragment",
+		"noEmitHelpers": true,
+		"importHelpers": true,
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["./src/*"]
