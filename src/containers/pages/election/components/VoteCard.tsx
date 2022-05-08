@@ -1,5 +1,6 @@
 import Card from '@/containers/components/Card';
 import NationalIdInput from '@/containers/components/NationalIdInput';
+import { validateNationalId } from '@/utils/validate';
 import { FunctionComponent, JSX } from 'preact';
 import { useCallback, useState } from 'preact/hooks';
 
@@ -14,7 +15,7 @@ const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel 
 	const [nationalId, setNationalId] = useState('');
 
 	const handleInputChange = (value: string) => {
-		if (value.length === 13) {
+		if (validateNationalId(value)) {
 			setNationalId(value);
 			setDisable(false);
 		} else {

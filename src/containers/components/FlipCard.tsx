@@ -14,9 +14,9 @@ type IProps = ICandidate & {
 
 const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, ...candidate }) => {
 	const [isFlipCard, setFlipCard] = useState(false);
+	const [, setNationalId] = useLocalStorage('nationalId', '');
 	const [isVoted, setIsVoted] = useLocalStorage('isVoted', false);
-	const [, setNationalId] = useLocalStorage('isVoted', false);
-
+	
 	const handleFlip = () => {
 		setFlipCard(() => true);
 	};

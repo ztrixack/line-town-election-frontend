@@ -174,7 +174,7 @@ src
 
 - [ ] Features/Logic
   - [*] Add state and fix process flow
-  - [ ] Check the identitiy ID by THAI ID
+  - [*] Check the identitiy ID by THAI ID
   - [ ] Add vote condition
   - [ ] Check and manage error and fail condition
   - [ ] Review the Business Logic

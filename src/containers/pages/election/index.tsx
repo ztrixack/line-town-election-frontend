@@ -10,47 +10,8 @@ import { IMessage } from '@stomp/stompjs';
 import { IVote } from '@/models/vote';
 import FlipCard from '@/containers/components/FlipCard';
 
-const c = [
-	{
-		id: '1',
-		name: 'test',
-		dob: new Date('05/08/2018'),
-		bioLink: 'test',
-		imageLink: 'http://placekitten.com/200/300',
-		policy: 'test test test',
-		votedCount: 0,
-	},
-	{
-		id: '2',
-		name: 'test2',
-		dob: new Date('05/08/2018'),
-		bioLink: 'test2',
-		imageLink: 'http://placekitten.com/200/300',
-		policy: 'test2',
-		votedCount: 10,
-	},
-	{
-		id: '3',
-		name: 'test3',
-		dob: new Date('05/08/2018'),
-		bioLink: 'test',
-		imageLink: 'http://placekitten.com/200/300',
-		policy: 'test',
-		votedCount: 0,
-	},
-	{
-		id: '4',
-		name: 'test4',
-		dob: new Date('05/08/2018'),
-		bioLink: 'test2',
-		imageLink: 'http://placekitten.com/200/300',
-		policy: 'test2',
-		votedCount: 0,
-	},
-];
-
 const ElectionPage = () => {
-	const [candidates, setCandidates] = useState<ICandidate[]>(c);
+	const [candidates, setCandidates] = useState<ICandidate[]>([]);
 	const [electionState, setElectionState] = useState<IElectionState>('voting');
 	const isElectionClosed = electionState == 'closed';
 	const mayor = candidates.reduce((result, candidate) => {
