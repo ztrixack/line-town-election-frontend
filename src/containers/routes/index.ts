@@ -1,10 +1,10 @@
 import { RouteProps } from 'wouter-preact';
-import Home from '../pages/home';
+import ElectionPage from '../pages/election';
 
 const routes: RouteProps[] = [
 	{
 		path: '/',
-		component: Home,
+		component: ElectionPage,
 	},
 ];
 

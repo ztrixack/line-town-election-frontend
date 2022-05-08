@@ -44,7 +44,10 @@
 		"sourceType": "module"
 	},
 	"ignorePatterns": [
-		"/dist/**/*" // Ignore built files.
+		"/dist/**/*", // Ignore built files.
+		"/test/**/*",
+		"*.config.js",
+		"*.config.ts"
 	],
 	"plugins": ["@typescript-eslint"],
 	"settings": {
@@ -53,9 +56,6 @@
 				"extensions": [".js", ".jsx", ".ts", ".tsx"],
 				"moduleDirectory": ["node_modules", "src/"]
 			}
-		},
-		"jest": {
-			"version": 26
 		}
 	}
 }

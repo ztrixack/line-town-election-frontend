@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vitest/config';
 import preact from '@preact/preset-vite';
 import * as path from 'path';
 
@@ -12,5 +12,12 @@ export default defineConfig({
 				replacement: path.join(__dirname, './src/'),
 			},
 		],
+	},
+	test: {
+		globals: true,
+		setupFiles: './test/setup.ts',
+		coverage: {
+			reporter: ['text', 'json', 'html'],
+		},
 	},
 });

@@ -17,11 +17,14 @@
 		"jsx": "preserve",
 		"jsxFactory": "h",
 		"jsxFragmentFactory": "Fragment",
+		"noEmitHelpers": true,
+		"importHelpers": true,
+		"types": ["vitest/globals"],
 		"baseUrl": "./",
 		"paths": {
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["src", "declarations"],
+	"include": ["src", "declarations", "../server/validate.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
