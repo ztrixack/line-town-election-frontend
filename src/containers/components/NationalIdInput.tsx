@@ -15,6 +15,11 @@ const NationalIdInput: FunctionComponent<IProps> = ({ class: className, onChange
 		(e: JSX.TargetedEvent<HTMLInputElement>) => {
 			if (!inputRef.current) return;
 
+			if (e.currentTarget.value.length == 0) {
+				setValue('');
+				return;
+			}
+
 			const presentValue = toNationalIdPresent(e.currentTarget.value);
 			if (!presentValue) return;
 

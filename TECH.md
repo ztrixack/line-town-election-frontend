@@ -173,7 +173,7 @@ src
   - [*] Refactor election status
 
 - [ ] Features/Logic
-  - [ ] Add Election state and process flow
+  - [*] Add state and fix process flow
   - [ ] Check the identitiy ID by THAI ID
   - [ ] Add vote condition
   - [ ] Check and manage error and fail condition

@@ -2,10 +2,11 @@ import { IElectionState } from '@/common/interfaces/election';
 import Card from '@/containers/components/Card';
 import { ICandidate } from '@/models/candidate';
 import { calculateAge, calculateVote } from '@/utils/calculate';
-import { FunctionComponent } from 'preact';
+import { FunctionComponent, JSX } from 'preact';
 
 export type IProps = ICandidate & {
 	state: IElectionState;
+	onOpenVote: () => void;
 };
 
 const CandidateCard: FunctionComponent<IProps> = ({
@@ -17,15 +18,21 @@ const CandidateCard: FunctionComponent<IProps> = ({
 	votedCount,
 	state,
 	percentage = '0%',
+	onOpenVote,
 }) => {
 	const age = calculateAge(dob).toString();
 	const vote = calculateVote(votedCount).toString();
 
+	const handleVoteClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		onOpenVote();
+	};
+
 	return (
 		<Card>
-			<div class="flex space-x-4 mb-3 md:flex-col md:space-x-0">
+			<div class="flex space-x-4 md:flex-col md:space-x-0">
 				<div class="flex flex-1 justify-end md:mb-3">
-					<img class="w-full h-28 md:h-48 shadow-lg" src={imageLink} alt={name} />
+					<img class="w-full h-28 md:h-48 shadow-lg object-cover" src={imageLink} alt={name} />
 					<div class="absolute w-8 md:w-12 bg-white text-center">
 						<span class="text-2xl md:text-4xl font-bold">{id}</span>
 					</div>
@@ -42,13 +49,13 @@ const CandidateCard: FunctionComponent<IProps> = ({
 				</div>
 			</div>
 
-			<div class="flex flex-col items-center py-2 px-2 md:px-0">
+			<div class="flex flex-auto justify-center items-center py-2 px-2 md:px-0">
 				<p class="text-2xl md:text-lg font-bold text-gray-900 text-center">
 					<i>"{policy}"</i>
 				</p>
 			</div>
 
-			<div class="flex flex-col items-center px-2 mt-6">
+			<div class="flex justify-end flex-col px-2 mb-2">
 				{state == 'closed' ? (
 					<div class="w-full bg-white border border-green-900">
 						<div
@@ -62,8 +69,9 @@ const CandidateCard: FunctionComponent<IProps> = ({
 				) : (
 					<button
 						type="button"
-						class={`${state == 'voting' ? '' : 'hidden '}btn btn-primary`}
+						class={`${state == 'voting' ? '' : 'hidden '}btn btn-primary w-28 mx-auto`}
 						data-testid="vote-button"
+						onClick={handleVoteClick}
 					>
 						Vote
 					</button>

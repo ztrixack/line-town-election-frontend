@@ -3,19 +3,65 @@ import { useEffect, useState } from 'preact/hooks';
 import { IElectionState } from '@/common/interfaces/election';
 import ElectionLayout from '@/containers/layouts/Election';
 import { CandidateAPI, ElectionAPI, VoteAPI } from '@/api';
-import CandidateCard from './components/CandidateCard';
 import { ICandidate } from '@/models/candidate';
-import VoteCard from './components/VoteCard';
-import AlreadyVotedCard from './components/AlreadyVotedCard';
 import { IElection } from '@/models/election';
 import useStomp from '@/common/hooks/useStomp';
 import { IMessage } from '@stomp/stompjs';
 import { IVote } from '@/models/vote';
+import FlipCard from '@/containers/components/FlipCard';
+
+const c = [
+	{
+		id: '1',
+		name: 'test',
+		dob: new Date('05/08/2018'),
+		bioLink: 'test',
+		imageLink: 'http://placekitten.com/200/300',
+		policy: 'test test test',
+		votedCount: 0,
+	},
+	{
+		id: '2',
+		name: 'test2',
+		dob: new Date('05/08/2018'),
+		bioLink: 'test2',
+		imageLink: 'http://placekitten.com/200/300',
+		policy: 'test2',
+		votedCount: 10,
+	},
+	{
+		id: '3',
+		name: 'test3',
+		dob: new Date('05/08/2018'),
+		bioLink: 'test',
+		imageLink: 'http://placekitten.com/200/300',
+		policy: 'test',
+		votedCount: 0,
+	},
+	{
+		id: '4',
+		name: 'test4',
+		dob: new Date('05/08/2018'),
+		bioLink: 'test2',
+		imageLink: 'http://placekitten.com/200/300',
+		policy: 'test2',
+		votedCount: 0,
+	},
+];
 
 const ElectionPage = () => {
-	const [candidates, setCandidates] = useState<ICandidate[]>([]);
-	const [electionState, setElectionState] = useState<IElectionState>('solicit');
+	const [candidates, setCandidates] = useState<ICandidate[]>(c);
+	const [electionState, setElectionState] = useState<IElectionState>('voting');
 	const isElectionClosed = electionState == 'closed';
+	const mayor = candidates.reduce((result, candidate) => {
+		if (!result) return candidate;
+
+		if (candidate.votedCount > result.votedCount) {
+			return candidate;
+		} else {
+			return result;
+		}
+	}, candidates[0]);
 
 	const handleVoteStream = (message: IMessage) => {
 		const vote = JSON.parse(message.body) as IVote;
@@ -74,19 +120,19 @@ const ElectionPage = () => {
 			<div class="flex flex-col justify-center text-center mt-8">
 				<h1 class="text-5xl md:text-6xl font-bold my-8">LINE TOWN Election</h1>
 				{isElectionClosed && (
-					<p class="flex flex-col md:flex-row mb-4">
-						<span class="text-lg">The new mayor is:</span>
-						<span class="text-4xl font-bold">#3 John Wick</span>
+					<p class="flex flex-col md:flex-row mb-4 justify-center items-baseline mx-auto">
+						<span class="text-lg md:mr-4">The new mayor is:</span>
+						<span class="text-4xl font-bold">
+							#{mayor.id} {mayor.name}
+						</span>
 					</p>
 				)}
 			</div>
 			<div class="flex flex-wrap px-3 md:px-6">
 				{candidates.map(candidate => (
-					<div class="w-full md:w-1/2 lg:w-1/4 md:px-6">
+					<div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
-							<CandidateCard {...candidate} state={electionState} />
-							<VoteCard id={candidate.id.toString()} onConfirm={handleVote} />
-							<AlreadyVotedCard />
+							<FlipCard {...candidate} state={electionState} onConfirm={handleVote} />
 						</div>
 					</div>
 				))}
