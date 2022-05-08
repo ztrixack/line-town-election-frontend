@@ -99,7 +99,7 @@ src
 
 - [ ] Features/RESTful API
   - [*] Create GET Candidates API
-  - [ ] Create Vote Candidate and Check Vote API
+  - [*] Create Vote Candidate and Check Vote API
   - [ ] Create Election actions API 
   - [ ] Review the RESTful API
 

@@ -13,13 +13,10 @@ const AlreadyVotedCard: FunctionComponent<IProps> = ({ onDone }) => {
 
 	return (
 		<Card>
-			<div class="">
-				<p class="">You have already voted</p>
-			</div>
-
-			<div class="flex flex-col space-x-4">
+			<div class="flex flex-col space-y-4 justify-center mx-auto">
+				<p class="text-3xl">You have already voted</p>
 				<button type="button" class="btn btn-primary" data-testid="done-button" onClick={handleDoneClick}>
-					Confirm
+					Done
 				</button>
 			</div>
 		</Card>

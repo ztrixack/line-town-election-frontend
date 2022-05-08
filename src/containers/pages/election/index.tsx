@@ -2,9 +2,11 @@ import { useEffect, useState } from 'preact/hooks';
 
 import { IElectionState } from '@/common/interfaces/election';
 import ElectionLayout from '@/containers/layouts/Election';
-import { CandidateAPI } from '@/api';
+import { CandidateAPI, VoteAPI } from '@/api';
 import CandidateCard from './components/CandidateCard';
 import { ICandidate } from '@/models/candidate';
+import VoteCard from './components/VoteCard';
+import AlreadyVotedCard from './components/AlreadyVotedCard';
 
 const ElectionPage = () => {
 	const [candidates, setCandidates] = useState<ICandidate[]>([]);
@@ -18,6 +20,10 @@ const ElectionPage = () => {
 		};
 		call();
 	}, []);
+
+	const handleVote = async (nationalId: string, candidateId: string) => {
+		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'content-type': 'application/json' } });
+	};
 
 	return (
 		<ElectionLayout>
@@ -35,6 +41,8 @@ const ElectionPage = () => {
 					<div class="w-full md:w-1/2 lg:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
 							<CandidateCard {...candidate} state={electionState} />
+							<VoteCard id={candidate.id.toString()} onConfirm={handleVote} />
+							<AlreadyVotedCard />
 						</div>
 					</div>
 				))}
