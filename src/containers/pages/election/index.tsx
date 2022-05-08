@@ -1,14 +1,51 @@
-import { useState } from 'preact/hooks';
+import { useEffect, useState } from 'preact/hooks';
 
 import { IElectionState } from '@/common/interfaces/election';
 import ElectionLayout from '@/containers/layouts/Election';
+import { CandidateAPI, ElectionAPI, VoteAPI } from '@/api';
+import CandidateCard from './components/CandidateCard';
+import { ICandidate } from '@/models/candidate';
 import VoteCard from './components/VoteCard';
-
-const mockups = [...Array(8)].fill(0);
+import AlreadyVotedCard from './components/AlreadyVotedCard';
+import { IElection } from '@/models/election';
 
 const ElectionPage = () => {
-	const [electionState] = useState<IElectionState>('voting');
+	const [candidates, setCandidates] = useState<ICandidate[]>([]);
+	const [election, setElection] = useState<IElection>();
+	const [electionState, setElectionState] = useState<IElectionState>('solicit');
 	const isElectionClosed = electionState == 'closed';
+
+	useEffect(() => {
+		const call = async () => {
+			const candidates = await CandidateAPI.find<ICandidate[]>();
+			setCandidates(candidates);
+			const election = await ElectionAPI.getToggle<IElection>();
+			setElection(election);
+		};
+		call();
+	}, []);
+
+	useEffect(() => {
+		const call = async () => {
+			if (!election) return;
+
+			let candidates = [];
+			if (election.enable) {
+				candidates = await CandidateAPI.find<ICandidate[]>();
+				setElectionState('voting');
+			} else {
+				candidates = await ElectionAPI.result<ICandidate[]>();
+				setElectionState('closed');
+			}
+			setCandidates(candidates);
+		};
+
+		call();
+	}, [election]);
+
+	const handleVote = async (nationalId: string, candidateId: string) => {
+		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'Content-Type': 'application/json' } });
+	};
 
 	return (
 		<ElectionLayout>
@@ -22,19 +59,12 @@ const ElectionPage = () => {
 				)}
 			</div>
 			<div class="flex flex-wrap px-3 md:px-6">
-				{mockups.map(() => (
+				{candidates.map(candidate => (
 					<div class="w-full md:w-1/2 lg:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
-							<VoteCard
-							// id={index}
-							// name="John Wick"
-							// state={electionState}
-							// dob={new Date('June 28, 1971')}
-							// imageLink="http://placekitten.com/600/600"
-							// policy="Choose me if your don't know who to choose"
-							// votedCount={1195}
-							// percentage="75%"
-							/>
+							<CandidateCard {...candidate} state={electionState} />
+							<VoteCard id={candidate.id.toString()} onConfirm={handleVote} />
+							<AlreadyVotedCard />
 						</div>
 					</div>
 				))}

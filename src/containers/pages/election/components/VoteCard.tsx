@@ -1,28 +1,35 @@
 import Card from '@/containers/components/Card';
 import NationalIdInput from '@/containers/components/NationalIdInput';
 import { FunctionComponent, JSX } from 'preact';
-import { useState } from 'preact/hooks';
+import { useCallback, useState } from 'preact/hooks';
 
 export type IProps = {
-	onConfirm?: () => void;
+	id: string;
+	onConfirm?: (nationalId: string, candidateId: string) => void;
 	onCancel?: () => void;
 };
 
-const VoteCard: FunctionComponent<IProps> = ({ onConfirm, onCancel }) => {
+const VoteCard: FunctionComponent<IProps> = ({ id, onConfirm, onCancel }) => {
 	const [disable, setDisable] = useState(true);
+	const [nationalId, setNationalId] = useState('');
 
 	const handleInputChange = (value: string) => {
 		if (value.length === 13) {
+			setNationalId(value);
 			setDisable(false);
 		} else {
+			setNationalId('');
 			setDisable(true);
 		}
 	};
 
-	const handleConfirmClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
-		e.preventDefault();
-		onConfirm && onConfirm();
-	};
+	const handleConfirmClick = useCallback(
+		(e: JSX.TargetedEvent<HTMLButtonElement>) => {
+			e.preventDefault();
+			onConfirm && onConfirm(nationalId, id);
+		},
+		[nationalId, id],
+	);
 
 	const handleCancelClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
 		e.preventDefault();

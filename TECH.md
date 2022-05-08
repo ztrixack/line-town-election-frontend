@@ -51,10 +51,12 @@ The frontend architecture for LINE TOWN election project
 - Uses Axios to make http requests
 - Uses Stomp and WebSocket to make full-duplex communication between the server and the client
 - Uses Tailwind.css to develop UI component and FontAwesome for icons
+- 
 
 <!-- FOLDER STRUCTURE -->
 declarations                // the type declaration files for all of the standardized built-in APIs available in JavaScript runtimes. 
 src
+├── api                     // api
 ├── assets                  // static resources and CSS style, which will be packaged and optimized
 │   ├── icons               // icon files e.g., ico, png, webp 
 │   ├── images              // image files e.g., png, jpg, webp 
@@ -78,6 +80,70 @@ src
 ├── app.tsx                 // add the global management
 └── main.tsx                // root project
 
+<!-- API -->
+## API
+
+### Request Details
+| Parameter  | Medhod | Path                 | Description                    |
+| ---------- | ------ | -------------------- | ------------------------------ |
+| candidates | GET    | /api/candidates      | Get all candidates             |
+| election   | GET    | /api/election/result | Get all candidates with result |
+| election   | GET    | /api/election/toggle | Get election status            |
+| election   | POST   | /api/election/toggle | Change election status         |
+| vote       | POST   | /api/vote            | Vote a candidate               |
+| vote       | POST   | /api/vote/status     | Check vote status              |
+
+#### GET Candidate
+| Header                      | Body | Success Response     | Error Response |
+| --------------------------- | ---- | -------------------- | -------------- |
+| Authiruzation: Bear <TOKEN> |      | [{                   | ???            |
+|                             |      | id: (string)         |                |
+|                             |      | name: (string)       |                |
+|                             |      | dob: (string)        |                |
+|                             |      | bioLink: (string)    |                |
+|                             |      | imageLink: (string)  |                |
+|                             |      | policy: (string)     |                |
+|                             |      | votedCount: (number) |                |
+|                             |      | }]                   |                |
+
+#### GET Election Result
+| Header                      | Body | Success Response     | Error Response |
+| --------------------------- | ---- | -------------------- | -------------- |
+| Authiruzation: Bear <TOKEN> |      | [{                   | ???            |
+|                             |      | id: (string)         |                |
+|                             |      | name: (string)       |                |
+|                             |      | dob: (string)        |                |
+|                             |      | bioLink: (string)    |                |
+|                             |      | imageLink: (string)  |                |
+|                             |      | policy: (string)     |                |
+|                             |      | votedCount: (number) |                |
+|                             |      | percentage: (string) |                |
+|                             |      | }]                   |                |
+
+#### GET Election Toggle
+| Header                         | Body          | Success Response     | Error Response |
+| ------------------------------ | ------------- | -------------------- | -------------- |
+| Authiruzation: Bear <TOKEN>    | enable (bool) | status: "ok"         | ???            |
+| Content-Type: application/json |               | enable: <true/false> |                |
+
+#### POST Election Toggle
+| Header                         | Body          | Success Response     | Error Response |
+| ------------------------------ | ------------- | -------------------- | -------------- |
+| Authiruzation: Bear <TOKEN>    | enable (bool) | status: "ok"         | ???            |
+| Content-Type: application/json |               | enable: <true/false> |                |
+
+#### POST vote
+| Header                         | Body                 | Success Response | Error Response                                  |
+| ------------------------------ | -------------------- | ---------------- | ----------------------------------------------- |
+| Authiruzation: Bear <TOKEN>    | nationalId (string)  | status: "ok"     | status: "error"                                 |
+| Content-Type: application/json | candidateId (number) |                  | message: <"Already voted"/"Election is closed"> |
+
+#### POST vote/status
+| Header                      | Body                | Success Response | Error Response |
+| --------------------------- | ------------------- | ---------------- | -------------- |
+| Authiruzation: Bear <TOKEN> | nationalId (string) | status: true     | status: false  |
+| Content-Type: app           |                     |                  |                |
+
 <!-- ROADMAP -->
 ## Roadmap
 
@@ -89,19 +155,19 @@ src
   - [*] Setup project folder structure
   - [*] Review project
 
-- [ ] Features/Mockup View
+- [*] Features/Mockup View
   - [*] Create election layout and mockup candidate list
   - [*] Create Candidate card with mockup data
   - [*] Add vitest for unit test
   - [*] Create Vote and Already voted card
   - [*] Review the Mockup View
 
-- [ ] Features/RESTful API
-  - [ ] Create GET Candidates API Calling
-  - [ ] Create Vote Candidate and Check Vote API Calling
-  - [ ] Create Election actions API 
-  - [ ] Review the RESTful API
-
+- [*] Features/RESTful API
+  - [*] Create GET Candidates API
+  - [*] Create Vote Candidate and Check Vote API
+  - [*] Create Election actions API 
+  - [*] Refactor and remove unnecessary code
+ 
 - [ ] Features/Web Socket
   - [ ] Create Web Socket stream for real-time vote count
   - [ ] Review the Web Socket
