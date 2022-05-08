@@ -14,7 +14,6 @@ import { IVote } from '@/models/vote';
 
 const ElectionPage = () => {
 	const [candidates, setCandidates] = useState<ICandidate[]>([]);
-	const [election, setElection] = useState<IElection>();
 	const [electionState, setElectionState] = useState<IElectionState>('solicit');
 	const isElectionClosed = electionState == 'closed';
 
@@ -30,8 +29,7 @@ const ElectionPage = () => {
 
 	const handleElectionStream = (message: IMessage) => {
 		const election = JSON.parse(message.body) as IElection;
-
-		setElection(() => election);
+		setElectionState(() => election.state);
 	};
 
 	useStomp('vote.update', handleVoteStream);
@@ -42,29 +40,30 @@ const ElectionPage = () => {
 			const candidates = await CandidateAPI.find<ICandidate[]>();
 			setCandidates(candidates);
 			const election = await ElectionAPI.getToggle<IElection>();
-			setElection(election);
+			setElectionState(election.state);
 		};
 		call();
 	}, []);
 
 	useEffect(() => {
 		const call = async () => {
-			if (!election) return;
-
 			let candidates = [];
-			if (election.enable) {
-				candidates = await CandidateAPI.find<ICandidate[]>();
-				setElectionState('voting');
-			} else {
-				candidates = await ElectionAPI.result<ICandidate[]>();
-				setElectionState('closed');
+			switch (electionState) {
+				case 'solicit':
+					return;
+				case 'voting':
+					candidates = await CandidateAPI.find<ICandidate[]>();
+					break;
+				case 'closed':
+					candidates = await ElectionAPI.result<ICandidate[]>();
+					break;
 			}
 
 			setCandidates(candidates);
 		};
 
 		call();
-	}, [election]);
+	}, [electionState]);
 
 	const handleVote = async (nationalId: string, candidateId: string) => {
 		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'Content-Type': 'application/json' } });
