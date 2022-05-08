@@ -8,12 +8,34 @@ import { ICandidate } from '@/models/candidate';
 import VoteCard from './components/VoteCard';
 import AlreadyVotedCard from './components/AlreadyVotedCard';
 import { IElection } from '@/models/election';
+import useStomp from '@/common/hooks/useStomp';
+import { IMessage } from '@stomp/stompjs';
+import { IVote } from '@/models/vote';
 
 const ElectionPage = () => {
 	const [candidates, setCandidates] = useState<ICandidate[]>([]);
 	const [election, setElection] = useState<IElection>();
 	const [electionState, setElectionState] = useState<IElectionState>('solicit');
 	const isElectionClosed = electionState == 'closed';
+
+	const handleVoteStream = (message: IMessage) => {
+		const vote = JSON.parse(message.body) as IVote;
+
+		setCandidates(candidates => {
+			const index = candidates.findIndex(c => c.id === vote.id);
+			candidates[index].votedCount = vote.votedCount;
+			return candidates;
+		});
+	};
+
+	const handleElectionStream = (message: IMessage) => {
+		const election = JSON.parse(message.body) as IElection;
+
+		setElection(() => election);
+	};
+
+	useStomp('vote.update', handleVoteStream);
+	useStomp('election.status', handleElectionStream);
 
 	useEffect(() => {
 		const call = async () => {
@@ -37,6 +59,7 @@ const ElectionPage = () => {
 				candidates = await ElectionAPI.result<ICandidate[]>();
 				setElectionState('closed');
 			}
+
 			setCandidates(candidates);
 		};
 
