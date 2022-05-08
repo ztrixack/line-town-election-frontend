@@ -1,102 +1,52 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, test, vi, beforeAll, afterAll } from 'vitest';
 import { calculateAge, calculateVote } from '../calculate';
 
+const date = 8;
+const month = 5;
+const year = 2022;
+
 /**
- *  @jest-environment happy-dom
+ * @vitest-environment happy-dom
  */
 describe('Calculate Age', () => {
-	const now = new Date();
-	const date = now.getDate();
-	const month = now.getMonth();
-	const year = now.getFullYear();
+	beforeAll(() => {
+		vi.useFakeTimers();
 
-	const testCases = [
-		{
-			title: 'success case',
-			input: new Date(`${month}/${date}/${year - 45}`),
-			expect: 45,
-		},
-		{
-			title: 'same year in past',
-			input: new Date(`${Math.min(1, month - 1)}/${Math.min(1, date - 1)}/${year}`),
-			expect: 0,
-		},
-		{
-			title: 'same day',
-			input: new Date(`${month}/${date}/${year}`),
-			expect: 0,
-		},
-		{
-			title: 'future',
-			input: new Date(`${month}/${date}/${year + 1}`),
-			expect: 0,
-		},
-	];
+		const now = new Date(year, month, date);
+		vi.setSystemTime(now);
+	});
 
-	testCases.forEach(testcase => {
-		it(testcase.title, () => {
-			const output = calculateAge(testcase.input);
-			expect(output).to.be.eq(testcase.expect);
-		});
+	afterAll(() => {
+		vi.useRealTimers();
+	});
+
+	test.each([
+		[`${month}/${date}/${year - 45}`, 45],
+		[`${month}/${date - 1}/${year}`, 0],
+		[`${month}/${date}/${year}`, 0],
+		[`${month}/${date + 1}/${year}`, 0],
+	])('input date %s, expected: %i', (date, expected) => {
+		const output = calculateAge(new Date(date));
+		expect(output).toEqual(expected);
 	});
 });
 
 /**
- *  @jest-environment happy-dom
+ * @vitest-environment happy-dom
  */
 describe('Calculate Vote', () => {
-	const testCases = [
-		{
-			title: '0',
-			input: 0,
-			expect: '0',
-		},
-		{
-			title: '90',
-			input: 90,
-			expect: '90',
-		},
-		{
-			title: '999',
-			input: 999,
-			expect: '999',
-		},
-		{
-			title: '1000',
-			input: 1000,
-			expect: '1K',
-		},
-		{
-			title: '9099',
-			input: 9099,
-			expect: '9K',
-		},
-		{
-			title: '99999',
-			input: 99999,
-			expect: '99.9K',
-		},
-		{
-			title: '999999',
-			input: 999999,
-			expect: '999.9K',
-		},
-		{
-			title: '1000000',
-			input: 1000000,
-			expect: '1M',
-		},
-		{
-			title: '1000000000000000',
-			input: 1000000000000000,
-			expect: 'uncountable',
-		},
-	];
-
-	testCases.forEach(testcase => {
-		it(testcase.title, () => {
-			const output = calculateVote(testcase.input);
-			expect(output.toString()).to.be.eq(testcase.expect);
-		});
+	test.each([
+		[0, '0'],
+		[90, '90'],
+		[999, '999'],
+		[1000, '1K'],
+		[9099, '9K'],
+		[99999, '99.9K'],
+		[999999, '999.9K'],
+		[1000000, '1M'],
+		[1000000000000000, 'uncountable'],
+	])('input %i, get %s', (input, expected) => {
+		const output = calculateVote(input);
+		expect(output.toString()).toEqual(expected);
 	});
 });

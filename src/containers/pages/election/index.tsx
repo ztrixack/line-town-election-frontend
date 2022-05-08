@@ -1,8 +1,8 @@
 import { useState } from 'preact/hooks';
 
 import { IElectionState } from '@/common/interfaces/election';
-import CandidateCard from '@/containers/components/CandidateCard';
 import ElectionLayout from '@/containers/layouts/Election';
+import VoteCard from './components/VoteCard';
 
 const mockups = [...Array(8)].fill(0);
 
@@ -22,18 +22,18 @@ const ElectionPage = () => {
 				)}
 			</div>
 			<div class="flex flex-wrap px-3 md:px-6">
-				{mockups.map((_, index) => (
+				{mockups.map(() => (
 					<div class="w-full md:w-1/2 lg:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
-							<CandidateCard
-								id={index}
-								name="John Wick"
-								state={electionState}
-								dob={new Date('June 28, 1971')}
-								imageLink="http://placekitten.com/600/600"
-								policy="Choose me if your don't know who to choose"
-								votedCount={1195}
-								percentage="75%"
+							<VoteCard
+							// id={index}
+							// name="John Wick"
+							// state={electionState}
+							// dob={new Date('June 28, 1971')}
+							// imageLink="http://placekitten.com/600/600"
+							// policy="Choose me if your don't know who to choose"
+							// votedCount={1195}
+							// percentage="75%"
 							/>
 						</div>
 					</div>

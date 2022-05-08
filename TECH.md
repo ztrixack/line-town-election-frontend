@@ -93,8 +93,8 @@ src
   - [*] Create election layout and mockup candidate list
   - [*] Create Candidate card with mockup data
   - [*] Add vitest for unit test
-  - [ ] Create Vote and Already voted card
-  - [ ] Review the Mockup View
+  - [*] Create Vote and Already voted card
+  - [*] Review the Mockup View
 
 - [ ] Features/RESTful API
   - [ ] Create GET Candidates API Calling

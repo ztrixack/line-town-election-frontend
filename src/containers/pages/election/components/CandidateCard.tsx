@@ -1,4 +1,5 @@
 import { IElectionState } from '@/common/interfaces/election';
+import Card from '@/containers/components/Card';
 import { calculateAge, calculateVote } from '@/utils/calculate';
 import { FunctionComponent } from 'preact';
 
@@ -28,7 +29,7 @@ const CandidateCard: FunctionComponent<IProps> = ({
 	const vote = calculateVote(votedCount).toString();
 
 	return (
-		<div class="max-w-sm bg-white border border-gray-700 shadow-xs p-4">
+		<Card>
 			<div class="flex space-x-4 mb-3 md:flex-col md:space-x-0">
 				<div class="flex flex-1 justify-end md:mb-3">
 					<img class="w-full h-28 md:h-48 shadow-lg" src={imageLink} alt={name} />
@@ -68,16 +69,14 @@ const CandidateCard: FunctionComponent<IProps> = ({
 				) : (
 					<button
 						type="button"
-						class={`${
-							state == 'voting' ? '' : 'hidden '
-						}text-white bg-blue-700 hover:bg-blue-900 uppercase rounded-md px-16 py-3 focus:outline-none focus:ring-4 focus:ring-blue-300`}
+						class={`${state == 'voting' ? '' : 'hidden '}btn btn-primary`}
 						data-testid="vote-button"
 					>
 						Vote
 					</button>
 				)}
 			</div>
-		</div>
+		</Card>
 	);
 };
 
