@@ -172,12 +172,11 @@ src
   - [*] Create Web Socket stream for real-time vote count
   - [*] Refactor election status
 
-- [ ] Features/Logic
+- [*] Features/Logic
   - [*] Add state and fix process flow
   - [*] Check the identitiy ID by THAI ID
-  - [ ] Add vote condition
-  - [ ] Check and manage error and fail condition
-  - [ ] Review the Business Logic
+  - [*] Add vote condition
+  - [*] Refactor code
 
 - [ ] Features/Integration
   - [ ] Complete the system to connect backend

@@ -1,5 +1,6 @@
-import Card from '@/containers/components/Card';
 import { FunctionComponent, JSX } from 'preact';
+
+import Card from '@/containers/components/Card';
 
 export type IProps = {
 	onDone?: () => void;

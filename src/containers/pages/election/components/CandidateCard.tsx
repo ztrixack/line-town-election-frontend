@@ -1,8 +1,9 @@
-import { IElectionState } from '@/common/interfaces/election';
-import Card from '@/containers/components/Card';
-import { ICandidate } from '@/models/candidate';
-import { calculateAge, calculateVote } from '@/utils/calculate';
 import { FunctionComponent, JSX } from 'preact';
+
+import { ICandidate } from '@/models/candidate';
+import { IElectionState } from '@/common/interfaces/election';
+import { calculateAge, calculateVote } from '@/utils/calculate';
+import Card from '@/containers/components/Card';
 
 export type IProps = ICandidate & {
 	state: IElectionState;

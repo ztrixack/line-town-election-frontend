@@ -1,5 +1,6 @@
-import { Client, StompHeaders, messageCallbackType } from '@stomp/stompjs';
 import { useEffect, useState } from 'preact/hooks';
+import { Client, StompHeaders, messageCallbackType } from '@stomp/stompjs';
+
 import _config from '@/common/configs/index';
 
 const useStomp = (routingKey: string, onCallback: messageCallbackType) => {

@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'preact/hooks';
+import { IMessage } from '@stomp/stompjs';
 
-import { IElectionState } from '@/common/interfaces/election';
-import ElectionLayout from '@/containers/layouts/Election';
 import { CandidateAPI, ElectionAPI, VoteAPI } from '@/api';
 import { ICandidate } from '@/models/candidate';
 import { IElection } from '@/models/election';
-import useStomp from '@/common/hooks/useStomp';
-import { IMessage } from '@stomp/stompjs';
 import { IVote } from '@/models/vote';
+import { IElectionState } from '@/common/interfaces/election';
+import useStomp from '@/common/hooks/useStomp';
+import ElectionLayout from '@/containers/layouts/Election';
 import FlipCard from '@/containers/components/FlipCard';
 
 const ElectionPage = () => {

@@ -1,8 +1,9 @@
+import { FunctionComponent } from 'preact';
+import { useState } from 'preact/hooks';
+
 import { useLocalStorage } from '@/common/hooks/useLocalStorage';
 import { IElectionState } from '@/common/interfaces/election';
 import { ICandidate } from '@/models/candidate';
-import { FunctionComponent } from 'preact';
-import { useState } from 'preact/hooks';
 import AlreadyVotedCard from '../pages/election/components/AlreadyVotedCard';
 import CandidateCard from '../pages/election/components/CandidateCard';
 import VoteCard from '../pages/election/components/VoteCard';
@@ -16,7 +17,7 @@ const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, ...candidate })
 	const [isFlipCard, setFlipCard] = useState(false);
 	const [, setNationalId] = useLocalStorage('nationalId', '');
 	const [isVoted, setIsVoted] = useLocalStorage('isVoted', false);
-	
+
 	const handleFlip = () => {
 		setFlipCard(() => true);
 	};

@@ -1,6 +1,6 @@
-import { cleanup, render } from '@testing-library/preact';
 import { JSX } from 'preact';
 import { afterEach } from 'vitest';
+import { cleanup, render } from '@testing-library/preact';
 
 afterEach(() => {
 	cleanup();

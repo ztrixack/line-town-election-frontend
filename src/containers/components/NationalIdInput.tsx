@@ -1,6 +1,7 @@
-import { toNationalIdPresent } from '@/utils/convert';
 import { FunctionComponent, JSX } from 'preact';
 import { useCallback, useRef, useState } from 'preact/hooks';
+
+import { toNationalIdPresent } from '@/utils/convert';
 
 type IProps = {
 	class?: string;

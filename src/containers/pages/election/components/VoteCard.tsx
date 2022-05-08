@@ -1,8 +1,9 @@
+import { FunctionComponent, JSX } from 'preact';
+import { useCallback, useState } from 'preact/hooks';
+
 import Card from '@/containers/components/Card';
 import NationalIdInput from '@/containers/components/NationalIdInput';
 import { validateNationalId } from '@/utils/validate';
-import { FunctionComponent, JSX } from 'preact';
-import { useCallback, useState } from 'preact/hooks';
 
 export type IProps = {
 	candidateId: string;
