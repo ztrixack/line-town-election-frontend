@@ -9,7 +9,14 @@ This project is the Solution Engineer Assignment for the full-stack engineer - s
 
 * [Vite.js](https://vitejs.dev/)
 * [Preact.js](https://preactjs.com/)
-
+* [Vitest](https://vitest.dev/)
+* [TypeScript](https://www.typescriptlang.org/)
+* [Tailwind CSS](https://tailwindcss.com/)
+* [daisyUI](https://daisyui.com/)
+* [Fort Awesome](https://fortawesome.com/)
+* [AXIOS](https://axios-http.com/)
+* [stompjs](https://stomp-js.github.io/api-docs/latest/)
+  
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -26,15 +33,26 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-2. Install NPM packages
+1. Install NPM packages via yarn:
    ```sh
    yarn
    ```
-   
+   or use npm command:
+   ```sh
+   npm install
+   ```
+
+### Testing
+
+This is a command for run all tests:
+  ```sh
+  yarn test
+  ```
+Enable the UI test by run this command:
+  ```sh
+  yarn test:ui
+  ```
+
 <!-- CONTACT -->
 ## Contact
 

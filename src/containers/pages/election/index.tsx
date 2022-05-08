@@ -43,8 +43,6 @@ const ElectionPage = () => {
 		call();
 	}, [election]);
 
-	
-
 	const handleVote = async (nationalId: string, candidateId: string) => {
 		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'Content-Type': 'application/json' } });
 	};

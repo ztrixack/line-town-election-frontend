@@ -25,6 +25,6 @@
 			"@/*": ["./src/*"]
 		}
 	},
-	"include": ["src", "declarations", "../server/validate.ts"],
+	"include": ["src", "declarations"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }
