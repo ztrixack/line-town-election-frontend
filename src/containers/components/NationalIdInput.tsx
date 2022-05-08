@@ -1,6 +1,7 @@
-import { toNationalIdPresent } from '@/utils/convert';
 import { FunctionComponent, JSX } from 'preact';
 import { useCallback, useRef, useState } from 'preact/hooks';
+
+import { toNationalIdPresent } from '@/utils/convert';
 
 type IProps = {
 	class?: string;
@@ -14,6 +15,11 @@ const NationalIdInput: FunctionComponent<IProps> = ({ class: className, onChange
 	const handleInputChange = useCallback(
 		(e: JSX.TargetedEvent<HTMLInputElement>) => {
 			if (!inputRef.current) return;
+
+			if (e.currentTarget.value.length == 0) {
+				setValue('');
+				return;
+			}
 
 			const presentValue = toNationalIdPresent(e.currentTarget.value);
 			if (!presentValue) return;

@@ -1,20 +1,22 @@
-import Card from '@/containers/components/Card';
-import NationalIdInput from '@/containers/components/NationalIdInput';
 import { FunctionComponent, JSX } from 'preact';
 import { useCallback, useState } from 'preact/hooks';
 
+import Card from '@/containers/components/Card';
+import NationalIdInput from '@/containers/components/NationalIdInput';
+import { validateNationalId } from '@/utils/validate';
+
 export type IProps = {
-	id: string;
+	candidateId: string;
 	onConfirm?: (nationalId: string, candidateId: string) => void;
 	onCancel?: () => void;
 };
 
-const VoteCard: FunctionComponent<IProps> = ({ id, onConfirm, onCancel }) => {
+const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel }) => {
 	const [disable, setDisable] = useState(true);
 	const [nationalId, setNationalId] = useState('');
 
 	const handleInputChange = (value: string) => {
-		if (value.length === 13) {
+		if (validateNationalId(value)) {
 			setNationalId(value);
 			setDisable(false);
 		} else {
@@ -26,9 +28,9 @@ const VoteCard: FunctionComponent<IProps> = ({ id, onConfirm, onCancel }) => {
 	const handleConfirmClick = useCallback(
 		(e: JSX.TargetedEvent<HTMLButtonElement>) => {
 			e.preventDefault();
-			onConfirm && onConfirm(nationalId, id);
+			onConfirm && onConfirm(nationalId, candidateId);
 		},
-		[nationalId, id],
+		[nationalId, candidateId],
 	);
 
 	const handleCancelClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
@@ -39,14 +41,14 @@ const VoteCard: FunctionComponent<IProps> = ({ id, onConfirm, onCancel }) => {
 	return (
 		<Card>
 			<div>
-				<p class="text-lg">Please enter your national ID to confirm your vote</p>
+				<p class="text-xl mx-2">Please enter your national ID to confirm your vote</p>
 			</div>
 
 			<div class="my-8">
 				<NationalIdInput class="input input-bordered w-full max-w-xs" onChange={handleInputChange} />
 			</div>
 
-			<div class="flex space-x-4 flex-auto">
+			<div class="flex flex-auto items-end space-x-4 mb-2">
 				<button
 					type="button"
 					class="btn btn-primary capitalize flex-1"
