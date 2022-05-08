@@ -1,16 +1,10 @@
 import { IElectionState } from '@/common/interfaces/election';
 import Card from '@/containers/components/Card';
+import { ICandidate } from '@/models/candidate';
 import { calculateAge, calculateVote } from '@/utils/calculate';
 import { FunctionComponent } from 'preact';
 
-export type IProps = {
-	id: number;
-	name: string;
-	dob: Date;
-	imageLink: string;
-	policy: string;
-	votedCount: number;
-	percentage?: string;
+export type IProps = ICandidate & {
 	state: IElectionState;
 };
 
@@ -24,7 +18,6 @@ const CandidateCard: FunctionComponent<IProps> = ({
 	state,
 	percentage = '0%',
 }) => {
-	const number = id.toString();
 	const age = calculateAge(dob).toString();
 	const vote = calculateVote(votedCount).toString();
 
@@ -34,7 +27,7 @@ const CandidateCard: FunctionComponent<IProps> = ({
 				<div class="flex flex-1 justify-end md:mb-3">
 					<img class="w-full h-28 md:h-48 shadow-lg" src={imageLink} alt={name} />
 					<div class="absolute w-8 md:w-12 bg-white text-center">
-						<span class="text-2xl md:text-4xl font-bold">{number}</span>
+						<span class="text-2xl md:text-4xl font-bold">{id}</span>
 					</div>
 				</div>
 				<div class="flex flex-1 flex-col md:flex-row justify-between">

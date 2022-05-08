@@ -168,9 +168,9 @@ src
   - [*] Create Election actions API 
   - [*] Refactor and remove unnecessary code
  
-- [ ] Features/Web Socket
-  - [ ] Create Web Socket stream for real-time vote count
-  - [ ] Review the Web Socket
+- [*] Features/Web Socket
+  - [*] Create Web Socket stream for real-time vote count
+  - [*] Refactor election status
 
 - [ ] Features/Logic
   - [ ] Add Election state and process flow
