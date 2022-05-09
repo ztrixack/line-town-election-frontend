@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'preact/hooks';
-import { IMessage } from '@stomp/stompjs';
 
 import { CandidateAPI, ElectionAPI, VoteAPI } from '@/api';
 import { ICandidate } from '@/models/candidate';
 import { IElection } from '@/models/election';
 import { IVote } from '@/models/vote';
 import { IElectionState } from '@/common/interfaces/election';
-import useStomp from '@/common/hooks/useStomp';
+import useWebSocket from '@/common/hooks/useWebSocket';
 import ElectionLayout from '@/containers/layouts/Election';
-import FlipCard from '@/containers/components/FlipCard';
+import FlipCard from '@/containers/pages/election/components/FlipCard';
+import { IMessageEvent } from 'websocket';
 
 const ElectionPage = () => {
 	const [candidates, setCandidates] = useState<ICandidate[]>([]);
@@ -24,29 +24,30 @@ const ElectionPage = () => {
 		}
 	}, candidates[0]);
 
-	const handleVoteStream = (message: IMessage) => {
-		const vote = JSON.parse(message.body) as IVote;
+	const handleVoteStream = (message: IMessageEvent) => {
+		const vote = JSON.parse(message.data.toString()) as IVote;
 
 		setCandidates(candidates => {
 			const index = candidates.findIndex(c => c.id === vote.id);
-			candidates[index].votedCount = vote.votedCount;
-			return candidates;
+			const newCandidatesValue = [...candidates];
+			newCandidatesValue[index].votedCount = vote.votedCount;
+			return newCandidatesValue;
 		});
 	};
 
-	const handleElectionStream = (message: IMessage) => {
-		const election = JSON.parse(message.body) as IElection;
+	const handleElectionStream = (message: IMessageEvent) => {
+		const election = JSON.parse(message.data.toString()) as IElection;
 		setElectionState(() => election.state);
 	};
 
-	useStomp('vote.update', handleVoteStream);
-	useStomp('election.status', handleElectionStream);
+	useWebSocket('election', handleElectionStream);
+	useWebSocket('vote', handleVoteStream);
 
 	useEffect(() => {
 		const call = async () => {
 			const candidates = await CandidateAPI.find<ICandidate[]>();
-			setCandidates(candidates);
 			const election = await ElectionAPI.getToggle<IElection>();
+			setCandidates(candidates);
 			setElectionState(election.state);
 		};
 		call();
@@ -73,7 +74,10 @@ const ElectionPage = () => {
 	}, [electionState]);
 
 	const handleVote = async (nationalId: string, candidateId: string) => {
-		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'Content-Type': 'application/json' } });
+		await VoteAPI.vote(
+			{ nationalId, candidateId: parseInt(candidateId) },
+			{ headers: { 'Content-Type': 'application/json' } },
+		);
 	};
 
 	return (

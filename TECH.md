@@ -179,7 +179,8 @@ src
   - [*] Refactor code
 
 - [ ] Features/Integration
-  - [ ] Complete the system to connect backend
+  - [*] Try to connect backend
+  - [*] Rollback to use RAW WebSocket instead of STOMP
   - [ ] Mockup token from identitiy ID
   - [ ] Create Dockerfile and docker-compose
   - [ ] Review the Integration

@@ -21,7 +21,7 @@ const CandidateCard: FunctionComponent<IProps> = ({
 	percentage = '0%',
 	onOpenVote,
 }) => {
-	const age = calculateAge(dob).toString();
+	const age = calculateAge(new Date(dob)).toString();
 	const vote = calculateVote(votedCount).toString();
 
 	const handleVoteClick = (e: JSX.TargetedEvent<HTMLButtonElement>) => {
@@ -33,7 +33,11 @@ const CandidateCard: FunctionComponent<IProps> = ({
 		<Card>
 			<div class="flex space-x-4 md:flex-col md:space-x-0">
 				<div class="flex flex-1 justify-end md:mb-3">
-					<img class="w-full h-28 md:h-48 shadow-lg object-cover" src={imageLink} alt={name} />
+					<img
+						class="w-full h-32 md:h-48 shadow-lg object-cover"
+						src={imageLink.slice(1, imageLink.length - 1)}
+						alt={name}
+					/>
 					<div class="absolute w-8 md:w-12 bg-white text-center">
 						<span class="text-2xl md:text-4xl font-bold">{id}</span>
 					</div>
@@ -51,7 +55,7 @@ const CandidateCard: FunctionComponent<IProps> = ({
 			</div>
 
 			<div class="flex flex-auto justify-center items-center py-2 px-2 md:px-0">
-				<p class="text-2xl md:text-lg font-bold text-gray-900 text-center">
+				<p class="text-lg font-bold text-gray-900 text-center">
 					<i>"{policy}"</i>
 				</p>
 			</div>
