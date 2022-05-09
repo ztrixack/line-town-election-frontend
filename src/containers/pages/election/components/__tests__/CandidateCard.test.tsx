@@ -13,7 +13,7 @@ describe('Election State', () => {
 	const defaultData: ICandidate = {
 		id: '1',
 		name: 'John Wick',
-		dob: new Date('June 28, 1971'),
+		dob: 'June 28, 1971',
 		imageLink: '<http://placekitten.com/600/600>',
 		bioLink: '<http://placekitten.com/600/600>',
 		policy: "Choose me if your don't know who to choose",

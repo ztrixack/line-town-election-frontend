@@ -3,20 +3,22 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is the Solution Engineer Assignment for the full-stack engineer - see the [TECH.md](TECH.md) file for details
+This project is the Solution Engineer Assignment for the full-stack engineer - see the [spec.md](spec.md) file for details
 
 ### Built With
 
 * [Vite.js](https://vitejs.dev/)
 * [Preact.js](https://preactjs.com/)
-* [Vitest](https://vitest.dev/)
 * [TypeScript](https://www.typescriptlang.org/)
+* [Wouter](https://github.com/molefrog/wouter)
+* [axios](https://axios-http.com/)
+* [WebSocket](https://github.com/theturtle32/WebSocket-Node)
+* [FortAwesome](https://fortawesome.com/)
 * [Tailwind CSS](https://tailwindcss.com/)
 * [daisyUI](https://daisyui.com/)
-* [Fort Awesome](https://fortawesome.com/)
-* [AXIOS](https://axios-http.com/)
-* [stompjs](https://stomp-js.github.io/api-docs/latest/)
-  
+* [Vitest](https://vitest.dev/)
+* [React Testing Library](https://testing-library.com/)
+
 <!-- GETTING STARTED -->
 ## Getting Started
 
@@ -25,33 +27,89 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
+Make sure that you have Node.js v16 and npm v8 or above installed.
 
-  ```sh
-  npm install yarn -g
-  ```
+### Config file
+Create .env at root, i.e.
+
+```
+VITE__BACKEND_BASE_URL=http://localhost:8000
+VITE__SOCKET_BASE_URL=ws://localhost:8000/ws
+```
+
+### Browser Support
+
+The default build targets browsers that support both native ESM via script tags and native ESM dynamic import.
 
 ### Installation
 
-1. Install NPM packages via yarn:
-   ```sh
-   yarn
-   ```
-   or use npm command:
-   ```sh
-   npm install
-   ```
+Install dependency packages:
+```sh
+# using yarn
+yarn
 
-### Testing
+# using npm
+npm install
+```
 
-This is a command for run all tests:
-  ```sh
-  yarn test
-  ```
-Enable the UI test by run this command:
-  ```sh
-  yarn test:ui
-  ```
+### Run the dev server
+
+```sh
+# using yarn
+yarn dev
+
+# using npm
+npm run dev
+```
+dev server running at: http://localhost:3000/
+
+### Scripts
+
+| Script        | Description                      |
+| ------------- | -------------------------------- |
+| yarn dev      | Run dev server                   |
+| yarn build    | Generates production build       |
+| yarn preview  | Locally preview production build |
+| yarn prepare  | It's just to configure husky     |
+| yarn coverage | An integrated coverage reporter  |
+| yarn test     | Run test                         |
+| yarn test:ui  | Run test with UI                 |
+
+### Run via docker
+Let’s run the server automatically via docker-compose:
+
+```sh
+docker-compose -p local -f ./docker-compose.yml up -d
+```
+
+Or run manually by build an image called "lte-frontend":
+
+```sh
+docker build -t lte-frontend:0.1.0 .
+```
+
+Now that this image is built, we can start a container with the following command, which will serve our app on port 3000.
+
+```sh
+docker run --rm -it -p 3000:8080 --name lte-frontend lte-frontend:0.1.0 
+```
+
+<!-- USAGE -->
+## Usage
+
+### Open Election
+```sh
+curl -X POST {endpoint}/api/election/toggle \
+  -H 'Content-Type: application/json' \
+  -d '{"enable":true}'
+```
+
+### Close Election
+```sh
+curl -X POST {endpoint}/api/election/toggle \
+  -H 'Content-Type: application/json' \
+  -d '{"enable":false}'
+```
 
 <!-- CONTACT -->
 ## Contact
