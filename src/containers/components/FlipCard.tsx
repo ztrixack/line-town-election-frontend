@@ -30,6 +30,7 @@ const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, ...candidate })
 		setIsVoted(true);
 		setNationalId(nationalId);
 		onConfirm(nationalId, candidateId);
+		setFlipCard(() => false);
 	};
 
 	return (

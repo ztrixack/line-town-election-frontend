@@ -179,7 +179,7 @@ src
   - [*] Refactor code
 
 - [ ] Features/Integration
-  - [ ] Complete the system to connect backend
+  - [*] Try to connect backend
   - [ ] Mockup token from identitiy ID
   - [ ] Create Dockerfile and docker-compose
   - [ ] Review the Integration

@@ -45,8 +45,8 @@ const ElectionPage = () => {
 	useEffect(() => {
 		const call = async () => {
 			const candidates = await CandidateAPI.find<ICandidate[]>();
-			setCandidates(candidates);
 			const election = await ElectionAPI.getToggle<IElection>();
+			setCandidates(candidates);
 			setElectionState(election.state);
 		};
 		call();
@@ -73,7 +73,10 @@ const ElectionPage = () => {
 	}, [electionState]);
 
 	const handleVote = async (nationalId: string, candidateId: string) => {
-		await VoteAPI.vote({ nationalId, candidateId }, { headers: { 'Content-Type': 'application/json' } });
+		await VoteAPI.vote(
+			{ nationalId, candidateId: parseInt(candidateId) },
+			{ headers: { 'Content-Type': 'application/json' } },
+		);
 	};
 
 	return (

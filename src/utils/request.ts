@@ -6,7 +6,7 @@ import { DEV_TOKEN } from '@/common/configs/constants';
 const baseURL = _config.apiUrl;
 
 axios.defaults.baseURL = baseURL;
-function buildURLFromTemplate(data: Record<string, string>, options: AxiosRequestConfig) {
+function buildURLFromTemplate(data: Record<string, any>, options: AxiosRequestConfig) {
 	const outputData = { ...data };
 	const outputURL = options.url?.replace(/\{(.+?)\}/g, (m: string, label: string) => {
 		const value = outputData[label];
@@ -25,7 +25,7 @@ function buildURLFromTemplate(data: Record<string, string>, options: AxiosReques
 }
 
 export default async <ResponseData>(
-	data: Record<string, string>,
+	data: Record<string, any>,
 	options: AxiosRequestConfig,
 	extraOptions: AxiosRequestConfig,
 ) => {
@@ -34,23 +34,23 @@ export default async <ResponseData>(
 	config.url = url;
 	switch (options.method) {
 		case 'post':
-			config.method = 'post';
+			config.method = 'POST';
 			config.data = outputData;
 			break;
 		case 'get':
-			config.method = 'get';
+			config.method = 'GET';
 			config.params = outputData;
 			break;
 		case 'put':
-			config.method = 'put';
+			config.method = 'PUT';
 			config.data = outputData;
 			break;
 		case 'delete':
-			config.method = 'delete';
+			config.method = 'DELETE';
 			config.params = outputData;
 			break;
 		case 'patch':
-			config.method = 'patch';
+			config.method = 'PATCH';
 			config.data = outputData;
 			break;
 		default:
@@ -62,7 +62,7 @@ export default async <ResponseData>(
 		config.headers = {
 			...options.headers,
 		};
-		config.withCredentials = true;
+		// config.withCredentials = true;
 		config.headers.Authorization = `Bearer ${DEV_TOKEN}`;
 
 		const result = await axios.request<ResponseData>({ ...config, ...extraOptions });

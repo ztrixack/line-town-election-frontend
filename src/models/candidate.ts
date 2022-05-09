@@ -1,7 +1,7 @@
 export type ICandidate = {
 	id: string;
 	name: string;
-	dob: Date;
+	dob: string;
 	bioLink: string;
 	imageLink: string;
 	policy: string;

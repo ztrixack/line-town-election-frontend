@@ -10,7 +10,7 @@ const useStomp = (routingKey: string, onCallback: messageCallbackType) => {
 	useEffect(() => {
 		const client = new Client({
 			brokerURL: _config.brokerUrl,
-			reconnectDelay: 200,
+			reconnectDelay: 20000,
 			heartbeatIncoming: 0,
 			heartbeatOutgoing: 0,
 			debug: str => {
