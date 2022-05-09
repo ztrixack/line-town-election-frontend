@@ -180,6 +180,7 @@ src
 
 - [ ] Features/Integration
   - [*] Try to connect backend
+  - [*] Rollback to use RAW WebSocket instead of STOMP
   - [ ] Mockup token from identitiy ID
   - [ ] Create Dockerfile and docker-compose
   - [ ] Review the Integration
