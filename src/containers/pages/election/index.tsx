@@ -7,7 +7,7 @@ import { IVote } from '@/models/vote';
 import { IElectionState } from '@/common/interfaces/election';
 import useWebSocket from '@/common/hooks/useWebSocket';
 import ElectionLayout from '@/containers/layouts/Election';
-import FlipCard from '@/containers/components/FlipCard';
+import FlipCard from '@/containers/pages/election/components/FlipCard';
 import { IMessageEvent } from 'websocket';
 
 const ElectionPage = () => {

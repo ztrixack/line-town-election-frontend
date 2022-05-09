@@ -4,9 +4,9 @@ import { useState } from 'preact/hooks';
 import { useLocalStorage } from '@/common/hooks/useLocalStorage';
 import { IElectionState } from '@/common/interfaces/election';
 import { ICandidate } from '@/models/candidate';
-import AlreadyVotedCard from '../pages/election/components/AlreadyVotedCard';
-import CandidateCard from '../pages/election/components/CandidateCard';
-import VoteCard from '../pages/election/components/VoteCard';
+import AlreadyVotedCard from './AlreadyVotedCard';
+import CandidateCard from './CandidateCard';
+import VoteCard from './VoteCard';
 
 type IProps = ICandidate & {
 	state: IElectionState;

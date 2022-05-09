@@ -12,6 +12,7 @@ export type IProps = {
 };
 
 const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel }) => {
+	const [error, setError] = useState(false);
 	const [disable, setDisable] = useState(true);
 	const [nationalId, setNationalId] = useState('');
 
@@ -22,6 +23,9 @@ const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel 
 		} else {
 			setNationalId('');
 			setDisable(true);
+			if (value.length == 13) {
+				setError(true);
+			}
 		}
 	};
 
@@ -46,6 +50,7 @@ const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel 
 
 			<div class="my-8">
 				<NationalIdInput class="input input-bordered w-full max-w-xs" onChange={handleInputChange} />
+				{error && <span class="text-xs text-red-700">Please input correct national ID</span>}
 			</div>
 
 			<div class="flex flex-auto items-end space-x-4 mb-2">

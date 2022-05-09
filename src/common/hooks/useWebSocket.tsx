@@ -10,13 +10,14 @@ const useWebSocket = (route: string, onCallback: (message: IMessageEvent) => voi
 	useEffect(() => {
 		const uuid = guidGenerator();
 		const client = new W3CWebSocket(`${_config.brokerUrl}/${route}/${uuid}`);
+
 		client.onopen = () => {
 			console.log(`WebSocket Client Connected ${uuid}`);
 			setReady(true);
 		};
 
 		client.onclose = () => {
-			console.log(`WebSocket Client  Disconnected ${uuid}`);
+			console.log(`WebSocket Client Disconnected ${uuid}`);
 			setReady(false);
 		};
 
