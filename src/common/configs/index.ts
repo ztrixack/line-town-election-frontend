@@ -1,9 +1,9 @@
-const baseUrl = import.meta.env.VITE__SERVICE_BASE_URL || 'http://localhost:8000';
-const brokerUrl = import.meta.env.VITE__BROKER_BASE_URL || 'ws://localhost:8000/ws';
+const baseUrl = import.meta.env.VITE__BACKEND_BASE_URL || 'http://localhost:8000';
+const socketUrl = import.meta.env.VITE__SOCKET_BASE_URL || 'ws://localhost:8000/ws';
 
 const defaultConfig = {
 	baseUrl,
-	brokerUrl,
+	socketUrl,
 	apiUrl: `${baseUrl}/api`,
 };
 

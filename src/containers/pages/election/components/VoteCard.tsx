@@ -17,6 +17,7 @@ const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel 
 	const [nationalId, setNationalId] = useState('');
 
 	const handleInputChange = (value: string) => {
+		setError(false);
 		if (validateNationalId(value)) {
 			setNationalId(value);
 			setDisable(false);

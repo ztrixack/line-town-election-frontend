@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  ltc-frontend:
+    depends_on:
+      - ltc-backend
+    build: .
+    restart: on-failure:5
+    environment:
+      - VITE__SERVICE_BASE_URL=http://ltc-backend:8000
+      - VITE__BROKER_BASE_URL=ws://ltc-backend:8000/ws
+    volumes:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - 3000:80
+    networks:
+      - election-network
+
+networks:
+  election-network:

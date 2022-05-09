@@ -9,10 +9,12 @@ import useWebSocket from '@/common/hooks/useWebSocket';
 import ElectionLayout from '@/containers/layouts/Election';
 import FlipCard from '@/containers/pages/election/components/FlipCard';
 import { IMessageEvent } from 'websocket';
+import { useLocalStorage } from '@/common/hooks/useLocalStorage';
 
 const ElectionPage = () => {
 	const [candidates, setCandidates] = useState<ICandidate[]>([]);
 	const [electionState, setElectionState] = useState<IElectionState>('voting');
+	const [isVoted, setIsVoted] = useLocalStorage('isVoted', false);
 	const isElectionClosed = electionState == 'closed';
 	const mayor = candidates.reduce((result, candidate) => {
 		if (!result) return candidate;
@@ -74,6 +76,7 @@ const ElectionPage = () => {
 	}, [electionState]);
 
 	const handleVote = async (nationalId: string, candidateId: string) => {
+		setIsVoted(true);
 		await VoteAPI.vote(
 			{ nationalId, candidateId: parseInt(candidateId) },
 			{ headers: { 'Content-Type': 'application/json' } },
@@ -97,7 +100,7 @@ const ElectionPage = () => {
 				{candidates.map(candidate => (
 					<div class="w-full md:w-1/2 lg:w-1/3 xl:w-1/4 md:px-6">
 						<div class="w-full mx-auto my-6">
-							<FlipCard {...candidate} state={electionState} onConfirm={handleVote} />
+							<FlipCard {...candidate} state={electionState} onConfirm={handleVote} isVoted={isVoted} />
 						</div>
 					</div>
 				))}

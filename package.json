@@ -6,7 +6,7 @@
 	"author": "Tanawat Hongthai (tana.h@kkumail.com)",
 	"scripts": {
 		"dev": "vite",
-		"build": "yarn test && tsc && vite build",
+		"build": "yarn test --run && tsc && vite build",
 		"preview": "vite preview",
 		"coverage": "vitest run --coverage",
 		"test": "vitest",

@@ -9,7 +9,7 @@ const useWebSocket = (route: string, onCallback: (message: IMessageEvent) => voi
 
 	useEffect(() => {
 		const uuid = guidGenerator();
-		const client = new W3CWebSocket(`${_config.brokerUrl}/${route}/${uuid}`);
+		const client = new W3CWebSocket(`${_config.socketUrl}/${route}/${uuid}`);
 
 		client.onopen = () => {
 			console.log(`WebSocket Client Connected ${uuid}`);

@@ -9,14 +9,14 @@ import CandidateCard from './CandidateCard';
 import VoteCard from './VoteCard';
 
 type IProps = ICandidate & {
+	isVoted: boolean;
 	state: IElectionState;
 	onConfirm: (nationalId: string, candidateId: string) => void;
 };
 
-const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, ...candidate }) => {
+const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, isVoted, ...candidate }) => {
 	const [isFlipCard, setFlipCard] = useState(false);
 	const [, setNationalId] = useLocalStorage('nationalId', '');
-	const [isVoted, setIsVoted] = useLocalStorage('isVoted', false);
 
 	const handleFlip = () => {
 		setFlipCard(() => true);
@@ -27,7 +27,6 @@ const FlipCard: FunctionComponent<IProps> = ({ state, onConfirm, ...candidate })
 	};
 
 	const handleVote = (nationalId: string, candidateId: string) => {
-		setIsVoted(true);
 		setNationalId(nationalId);
 		onConfirm(nationalId, candidateId);
 		setFlipCard(() => false);
