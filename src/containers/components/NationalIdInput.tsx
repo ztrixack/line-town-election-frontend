@@ -22,7 +22,10 @@ const NationalIdInput: FunctionComponent<IProps> = ({ class: className, onChange
 			}
 
 			const presentValue = toNationalIdPresent(e.currentTarget.value);
-			if (!presentValue) return;
+			if (!presentValue) {
+				inputRef.current.value = '';
+				return;
+			}
 
 			inputRef.current.value = presentValue;
 			const numbers = presentValue.replace(/(\D)/g, '');
