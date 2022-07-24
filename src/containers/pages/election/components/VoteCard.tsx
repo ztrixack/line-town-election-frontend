@@ -49,8 +49,8 @@ const VoteCard: FunctionComponent<IProps> = ({ candidateId, onConfirm, onCancel 
 				<p class="text-xl mx-2">Please enter your national ID to confirm your vote</p>
 			</div>
 
-			<div class="my-8">
-				<NationalIdInput class="input input-bordered w-full max-w-xs" onChange={handleInputChange} />
+			<div class="flex flex-col my-8">
+				<NationalIdInput class="input input-bordered w-full" onChange={handleInputChange} />
 				{error && <span class="text-xs text-red-700">Please input correct national ID</span>}
 			</div>
 
